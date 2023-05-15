@@ -3,11 +3,13 @@ const express = require('express');
 const Schema = mongoose.Schema;
 const app = express();
 const jsonParser = express.json();
+const authRouter = require('./authRouter')
 
 const bookScheme = new Schema({name: String, year: Number, author: String}, {versionKey: false});
 const Book = mongoose.model("Book", bookScheme);
 
 app.use(express.static(__dirname + "/public"));
+app.use("/auth", authRouter);
 
 async function main() {
  
